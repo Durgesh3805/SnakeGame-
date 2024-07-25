@@ -21,8 +21,14 @@ velocityX =0;
 velocityY=0;
 screenWidth=900
 screenHeight=500
-foodX=random.randint(0,screenWidth)
-foodY =random.randint(0,screenHeight)
+foodX=random.randint(0,int(screenWidth/1.5))
+foodY =random.randint(0,int(screenHeight/1.5))
+
+
+score = 0
+
+
+
 clock =pygame.time.Clock()
 
 
@@ -35,7 +41,7 @@ pygame.display.update()
 
 while not exitGame:
     for event in pygame.event.get():
-        print(event)
+        # print(event)
         if event.type == pygame.QUIT:
             exitGame = True
         if event.type == pygame.KEYDOWN :
@@ -56,6 +62,12 @@ while not exitGame:
 
     snakeX +=velocityX
     snakeY +=velocityY
+    if abs(snakeX -foodX) <6 and abs(snakeY-foodY)<6:
+        score +=1
+        print(f"Score :{score}")
+        foodX=random.randint(0,int(screenWidth/1.5))
+        foodY =random.randint(0,int(screenHeight/1.5))
+
 
 
     gameWindow.fill(white)
